@@ -31,13 +31,13 @@ abstract class Hexagon extends Shape{
 		return super.clone();
 	}
 
-    public String compareTo(Hexagon hex){
+    public int compareTo(Hexagon hex){
         if (getArea() > hex.getArea() || getPerimeter() > hex.getPerimeter()){
-            return "Hexagon 1 is larger";
+            return 1;
         }
         if (getArea() < hex.getArea() || getPerimeter() < hex.getPerimeter()){
-            return "Hexagon 2 is larger";
+            return -1;
         }
-        return "The Hexagons are identical";
+        return 0;
     }
 }

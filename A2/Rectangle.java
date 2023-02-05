@@ -6,7 +6,7 @@ public abstract class Rectangle extends Shape {
     private double height;
 
     //Constructors
-    protected Rectangle(){this.("White",true,0.0,0.0);}
+    protected Rectangle(){this("White",true,0.0,0.0);}
     protected Rectangle(String colour, boolean filled, double width, double height){
         super.setColor(colour);
         super.setFilled(filled);
@@ -38,13 +38,13 @@ public abstract class Rectangle extends Shape {
 		return super.clone();
 	}
 
-    public String compareTo(Rectangle rect){
+    public int compareTo(Rectangle rect){
         if (getArea() > rect.getArea() || getPerimeter() > rect.getPerimeter()){
-            return "Rectangles 1 is larger";
+            return 1;
         }
         if (getArea() < rect.getArea() || getPerimeter() < rect.getPerimeter()){
-            return "Rectangle 2 is larger";
+            return -1;
         }
-        return "The Rectangles are identical";
+        return 0;
     }
 }

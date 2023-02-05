@@ -21,6 +21,14 @@ public class RectTest{
         System.out.println("First Rectangle:\n"+rect1.toString());
         Rectangle rect2 = (Rectangle) rect1.clone();
         System.out.println("\nCloned Rectangle:\n"+rect2.toString());
-        System.out.println(rect1.compareTo(rect2));
+        switch(rect1.compareTo(rect2)){
+            case 1:
+                System.out.println("Rectangle 1 is larger");
+            case -1:
+                System.out.println("Rectangle 2 is larger");
+            default:
+                System.out.println("The Rectangles are identical");
+        }
+        input.close();
     } 
 }

@@ -19,9 +19,15 @@ public class HexTest{
         System.out.println("First Hexagon:\n"+hex1.toString());
         Hexagon hex2 = (Hexagon) hex1.clone();
         System.out.println("\nCloned Hexagon:\n"+hex2.toString());
-        System.out.println(hex1.compareTo(hex2));
+        switch(hex1.compareTo(hex2)){
+            case 1:
+                System.out.println("Hexagon 1 is larger");
+            case -1:
+                System.out.println("Hexagon 2 is larger");
+            default:
+                System.out.println("The Hexagons are identical");
+        }
 
-        
-
+        input.close();
     } 
 }
