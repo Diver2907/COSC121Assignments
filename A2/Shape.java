@@ -1,6 +1,6 @@
 package A2;
 
-public abstract class Shape {
+public abstract class Shape implements Cloneable, Comparable<Shape>{
 	//attributes
 	private String color;
 	private boolean filled;
@@ -20,6 +20,19 @@ public abstract class Shape {
 	}
 	public abstract double getArea();
 	public abstract double getPerimeter();
+	public int compareTo(Shape shp){
+		if (shp.getArea()>10){
+			return 1;
+		}
+		if(shp.getArea()<10){
+			return -1;
+		}
+		return 0;
+	}
+
+	public Object clone() throws CloneNotSupportedException{
+		return super.clone();
+	}
 }
 
 
