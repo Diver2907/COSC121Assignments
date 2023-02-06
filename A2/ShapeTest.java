@@ -19,22 +19,23 @@ public class ShapeTest {
         for (int i=0; i<shapes1.length;i++){
             shapes2[i] = (Shape) shapes1[i].clone();
         }
-        System.out.println("Before");
-        for (int i=0; i<shapes2.length;i++){
-            System.out.println(shapes2[i].getArea());
-        }
-        System.out.println("\nAfter");
-        for(int i=1; i<shapes2.length;i++){
-            double areaItem = shapes2[i].getArea();
-            int j = i-1;
-            while(j>=0 && shapes2[j].getArea()>areaItem){
-                shapes2[j+1] = shapes2[j];
-                j-=1;
+        System.out.println("shapes1 has been cloned to shapes2.");
+        for(int i=0; i<shapes2.length-1;i++){
+            for(int j=0;j<shapes2.length-i-1;j++){
+                double area1 = shapes2[j].getArea();
+                double area2 = shapes2[j+1].getArea();
+                Shape temp = shapes2[j];
+                if(area1>area2){
+                    shapes2[j] = shapes2[j+1];
+                    shapes2[j+1] = temp;
+                }
             }
-            shapes2[j+1] = shapes2[i];
         }
-        for (int i=0; i<shapes2.length;i++){
-            System.out.println(shapes2[i].getArea());
+        System.out.println("shapes2 has been reordered!");
+
+        System.out.println("Areas in shapes1\tAreas in shapes2");
+        for(int i=0;i<shapes1.length;i++){
+            System.out.printf("%3.2f\t\t\t%3.2f\n",shapes1[i].getArea(),shapes2[i].getArea());
         }
     }
 }
