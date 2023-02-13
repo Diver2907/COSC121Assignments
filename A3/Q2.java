@@ -15,48 +15,32 @@ public class Q2 {
         while(true){
             try{
                 num1 = in.nextDouble();
-                try{
-                    operator = in.next().charAt(0);
-                    try{
-                        num2 = in.nextDouble();
-                        switch(operator){
-                            case '+':
-                                System.out.println("Result: "+(num1+num2));
-                                break;
-                            case '-':
-                                System.out.println("Result: "+(num1-num2));
-                                break;
-                            case '*':
-                                System.out.println("Result: "+(num1*num2));
-                                break;
-                            case '/':
-                                System.out.println("Result: "+(num1/num2));
-                                break;
-                            default:
-                                System.out.println("Invalid operator. Try again");
-                                break;
-                        }
-                    }
-                    catch(InputMismatchException e){
-                        System.out.println("Invalid number format. Try again");
-                        in.nextLine();
-                        num2 = in.nextDouble();
-                    }
-                }
-                catch(InputMismatchException e){
-                    System.out.println("Invalid operator format. Try again");
-                    operator = in.next().charAt(0);
+                operator = in.next().charAt(0);
+                num2 = in.nextDouble();
+                switch(operator){
+                    case '+':
+                        System.out.println("Result: "+(num1+num2));
+                        break;
+                    case '-':
+                        System.out.println("Result: "+(num1-num2));
+                        break;
+                    case '*':
+                        System.out.println("Result: "+(num1*num2));
+                        break;
+                    case '/':
+                        System.out.println("Result: "+(num1/num2));
+                        break;
+                    default:
+                        System.out.println("Invalid operator. Try again");
+                        break;
                 }
             }
             catch(InputMismatchException e){
                 System.out.println("Invalid number format. Try again");
                 in.nextLine();
-                num1 = in.nextDouble();
             }
-            
-            
-            
-            
         }
+        
     }
+    
 }
