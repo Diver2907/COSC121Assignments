@@ -7,33 +7,56 @@ public class Q2 {
         Scanner in = new Scanner(System.in);
         
         double num1;
-        String operator;
+        char operator;
         double num2;
+
         System.out.print("Enter a simple mathematical formula\nExample: 4.5 + 5.3\nEnter: ");
-        while (true){
+
+        while(true){
             try{
                 num1 = in.nextDouble();
-                operator = in.next();
-                num2 = in.nextDouble();
-                switch(operator){
-                    case "+":
-                        System.out.println("Result: "+(num1+num2));
-                    case "-":
-                        System.out.println("Result: "+(num1-num2));
-                    case "*":
-                        System.out.println("Result: "+(num1*num2));
-                    case "/":
-                        System.out.println("Result: "+(num1/num2));
-                    default:
-                        System.out.print(-1);
+                try{
+                    operator = in.next().charAt(0);
+                    try{
+                        num2 = in.nextDouble();
+                        switch(operator){
+                            case '+':
+                                System.out.println("Result: "+(num1+num2));
+                                break;
+                            case '-':
+                                System.out.println("Result: "+(num1-num2));
+                                break;
+                            case '*':
+                                System.out.println("Result: "+(num1*num2));
+                                break;
+                            case '/':
+                                System.out.println("Result: "+(num1/num2));
+                                break;
+                            default:
+                                System.out.println("Invalid operator. Try again");
+                                break;
+                        }
+                    }
+                    catch(InputMismatchException e){
+                        System.out.println("Invalid number format. Try again");
+                        in.nextLine();
+                        num2 = in.nextDouble();
+                    }
+                }
+                catch(InputMismatchException e){
+                    System.out.println("Invalid operator format. Try again");
+                    operator = in.next().charAt(0);
                 }
             }
             catch(InputMismatchException e){
-                System.out.println("Error with input. Try again:");
+                System.out.println("Invalid number format. Try again");
+                in.nextLine();
                 num1 = in.nextDouble();
-                operator = in.next();
-                num2 = in.nextDouble();
-            }  
-        }     
+            }
+            
+            
+            
+            
+        }
     }
 }
