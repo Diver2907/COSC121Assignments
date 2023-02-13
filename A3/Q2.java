@@ -15,9 +15,18 @@ public class Q2 {
                 num1 = in.nextDouble();
                 operator = in.next();
                 num2 = in.nextDouble();
-                System.out.println(num1);
-                System.out.println(operator);
-                System.out.println(num2);
+                switch(operator){
+                    case "+":
+                        System.out.println("Result: "+(num1+num2));
+                    case "-":
+                        System.out.println("Result: "+(num1-num2));
+                    case "*":
+                        System.out.println("Result: "+(num1*num2));
+                    case "/":
+                        System.out.println("Result: "+(num1/num2));
+                    default:
+                        System.out.print(-1);
+                }
             }
             catch(InputMismatchException e){
                 System.out.println("Error with input. Try again:");
