@@ -2,7 +2,7 @@ package COSC121Assignments.A3;
 
 import java.util.Scanner;
 
-public class DefensiveQ1 {
+public class ExceptionHandledQ1 {
     public static void main(String[] args){
         int[] numbers = new int[50];
         for(int i = 0;i<numbers.length;i++){
@@ -11,8 +11,16 @@ public class DefensiveQ1 {
         Scanner in = new Scanner(System.in);
         System.out.print("Enter an Index: ");
         int index = in.nextInt();
-        if){
 
+        while(true){
+            try{
+                System.out.println("The element is: "+numbers[index]);
+                break;
+            }
+            catch(IndexOutOfBoundsException e){
+                System.out.print("Out of Bounds. Try Again: ");
+                index = in.nextInt();
+            }
         }
     }
 }
