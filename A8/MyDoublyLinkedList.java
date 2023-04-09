@@ -1,14 +1,14 @@
 package A8;
 
-public class MyLinkedList<E> {
+public class MyDoublyLinkedList<E> {
 	private int size;
 	private Node<E> head, tail;
 
 	// Constructors
-	public MyLinkedList() {
+	public MyDoublyLinkedList() {
 		head = tail = null;
 	}
-	public MyLinkedList(E[] objects) {
+	public MyDoublyLinkedList(E[] objects) {
 		for (int i = 0; i < objects.length; i++)
 			add(objects[i]);	
 	}
