@@ -1,14 +1,14 @@
 package A8;
 
-public class MyLinkedList<E> {
+public class MyDoublyLinkedList<E> {
 	private int size;
 	private Node<E> head, tail;
 
 	// Constructors
-	public MyLinkedList() {
+	public MyDoublyLinkedList() {
 		head = tail = null;
 	}
-	public MyLinkedList(E[] objects) {
+	public MyDoublyLinkedList(E[] objects) {
 		for (int i = 0; i < objects.length; i++)
 			add(objects[i]);	
 	}
@@ -21,6 +21,7 @@ public class MyLinkedList<E> {
 	}
 	public void addFirst(E e) {		/** add code to set 'previous' [1 mark] */
 		Node<E> newNode = new Node<E>(e); // Create a new node
+		newNode.previous = null;
 		if (tail == null) 			// if empty list
 			head = tail = newNode; 	// new node is the only node in list
 		else {
@@ -34,6 +35,7 @@ public class MyLinkedList<E> {
 		if (tail == null) 			// if empty list
 			head = tail = newNode; 	// new node is the only node in list
 		else {
+			newNode.previous = tail;
 			tail.next = newNode; 	// Link the new with the last node
 			tail = tail.next; 		// tail now points to the last node
 		}
@@ -50,6 +52,8 @@ public class MyLinkedList<E> {
 			for (int i = 1; i < index; i++) // ]- get a reference to index-1
 				current = current.next; 	// ]
 			newNode.next = current.next; 	// Link the new node to element @ index
+			newNode.previous = current;
+			current.next.previous = newNode;
 			current.next = newNode; 		// Link element @ index-1 to newNode
 			size++;
 		}
@@ -62,6 +66,7 @@ public class MyLinkedList<E> {
 		else {
 			Node<E> temp = head; 	// element will be returned
 			head = head.next;
+			head.previous = null;
 			size--;
 			if (head == null) 		// if list becomes empty
 				tail = null;
@@ -82,6 +87,7 @@ public class MyLinkedList<E> {
 			for (int i = 0; i < size - 2; i++)
 				current = current.next;
 			tail = current;
+			tail = tail.previous;
 			tail.next = null; 			// remove last
 			size--;
 			return temp.element; 		// return last
@@ -100,6 +106,7 @@ public class MyLinkedList<E> {
 				prev = prev.next;
 			Node<E> current = prev.next;
 			prev.next = current.next;
+			prev.next.previous = prev;
 			size--;
 			return current.element;
 		}
@@ -137,9 +144,7 @@ public class MyLinkedList<E> {
 		else if (index == size - 1)
 			return getLast();
 		else {
-			Node<E> current = head; 		// ]
-			for (int i = 0; i < index; i++)	// ]- get a reference to node @ index
-				current = current.next; 	// ]
+			Node<E> current = getNodeAt(index);
 			return current.element;
 		}
 	}
@@ -148,9 +153,7 @@ public class MyLinkedList<E> {
 	public E set(int index, E e) {	/** improve performance using 'previous' [1 mark]*/
 		if (index < 0 || index > size - 1)
 			return null;
-		Node<E> current = head;
-		for (int i = 0; i < index; i++)
-			current = current.next;
+		Node<E> current = getNodeAt(index);
 		E temp = current.element;
 		current.element = e;
 		return temp;
@@ -171,7 +174,16 @@ public class MyLinkedList<E> {
 		return result.toString();
 	}
 	public String toReversedString(){/** write code to return a string representing the list from right to left [3 marks]*/
-		return null;
+		StringBuilder result =  new StringBuilder("[");
+		Node<E> current = head;
+		for(int i=0;i<size;i++){
+			result.append(current.element);
+			current = current.next;
+			if(current != null){
+				result.append(", ");
+			}else{result.append("]");}
+		}
+		return result.toString();
 	}
 	
 	//*** CHECKING *** 
@@ -196,13 +208,13 @@ public class MyLinkedList<E> {
 	}
 	public int lastIndexOf(E e) {	/** improve performance using 'previous' [3 marks]*/
 		int lastIndex = -1;
-		Node<E> current = head;
-		for (int i = 0; i < size; i++) {
+		Node<E> current = tail;
+		for (int i = size-1; i>=0; i--) {
 			if (current.element.equals(e))
-				lastIndex = i;
-			current = current.next;
+				return i;
+			current = current.previous;
 		}
-		return lastIndex;
+		return -1;
 	}	
 	
 	//*** HELPER METHODS ***
@@ -212,13 +224,27 @@ public class MyLinkedList<E> {
 					+ size);
 	}
 	private Node<E> getNodeAt(int index){ /** write code for this method to return a reference to a node at a given index [3 marks]*/
-		return null;
+		if(index <size/2){
+			Node<E> current = head;
+			for(int i=0;i<index;i++){
+				current = current.next;
+			}
+			return current;
+		}else{
+			Node<E> current = tail;
+			for(int i = 0;i<index;i++){
+				current = current.previous;
+			}
+			return current;
+		}
 	}
 
 	//*** INNER NODE CLASS *** 
-	private static class Node<E> {	/** add code to consider 'previous' [1 mark]*/
+	private static class Node<E> {
+	/** add code to consider 'previous' [1 mark]*/
 		E element;
 		Node<E> next;
+		Node<E> previous;
 
 		public Node(E e) {
 			element = e;
